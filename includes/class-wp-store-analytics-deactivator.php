@@ -30,7 +30,8 @@ class Wp_Store_Analytics_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-
+		delete_option("active_ecommerce_plugin_name");
+		delete_option("active_ecommerce_plugin_version");
 	}
 
 }

@@ -30,7 +30,23 @@ class Wp_Store_Analytics_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+		
+		/** Teste if woocomerce is present **/
+		if (class_exists( 'WooCommerce')) {
+            global  $woocommerce ;
+			if(!version_compare( $woocommerce->version,"2.7", ">=" ) ) {
+				die('Woocomerce doit >= 2.7. Curent version:'.$woocommerce->version);
+			}else{
+				add_option('active_ecommerce_plugin_name','woocomerce');
+				add_option('active_ecommerce_plugin_version',$woocommerce->version);
+			}
+		}
+		/*** Test if WP-commerce is present */
+		elseif(!is_plugin_active('wp-e-commerce/wp-shopping-cart.php')){
+			die("ce plugin necessite woocommerce > 2.7 ou WP eCommerce");
+		}else{
+			add_option('active_ecommerce_plugin_name','wp-e-commerce');
+		}	
 	}
 
 }
