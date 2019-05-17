@@ -99,5 +99,20 @@ class Wp_Store_Analytics_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-store-analytics-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
-
+	public function add_admin_menu_page(){
+		$this->plugin_screen_hook_suffix = add_menu_page( "Store analytics", "Store analytics","manage_options","wp-store-analytics-menu",array($this,'dashboard_page'),'','2.2.9');
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Dashboard','Dashboard', "manage_options", 'wp-store-analytics-dashboard-submenu', array($this,'dashboard_page'));
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Analytics','Analytics', "manage_options", 'wp-store-analytics-analytics-submenu', array($this,'analytics_page'));
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Configuration','Configuration', "manage_options", 'wp-store-analytics-config-submenu', array($this,'config_page'));
+	}
+	function dashboard_page(){
+		include_once 'partials/wp-store-analytics-admin-dashboard.php';
+	}
+	function analytics_page(){
+		include_once 'partials/wp-store-analytics-admin-dashboard.php';
+	}
+	function config_page(){
+		include_once 'partials/wp-store-analytics-admin-dashboard.php';
+	}
+	
 }

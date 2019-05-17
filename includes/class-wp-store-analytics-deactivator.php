@@ -33,5 +33,4 @@ class Wp_Store_Analytics_Deactivator {
 		delete_option("active_ecommerce_plugin_name");
 		delete_option("active_ecommerce_plugin_version");
 	}
-
 }
