@@ -102,17 +102,21 @@ class Wp_Store_Analytics_Admin {
 	public function add_admin_menu_page(){
 		$this->plugin_screen_hook_suffix = add_menu_page( "Store analytics", "Store analytics","manage_options","wp-store-analytics-menu",array($this,'dashboard_page'),'','2.2.9');
 		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Dashboard','Dashboard', "manage_options", 'wp-store-analytics-dashboard-submenu', array($this,'dashboard_page'));
-		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Analytics','Analytics', "manage_options", 'wp-store-analytics-analytics-submenu', array($this,'analytics_page'));
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Store_analytics','Store analytics', "manage_options", 'wp-store-analytics-analytics-submenu', array($this,'store_analytics_page'));
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Trafic_analytics','Trafic analytics', "manage_options", 'wp-store-analytics-analytics-submenu', array($this,'trafic_analytics_page'));
 		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Configuration','Configuration', "manage_options", 'wp-store-analytics-config-submenu', array($this,'config_page'));
 	}
 	function dashboard_page(){
-		include_once 'partials/wp-store-analytics-admin-dashboard.php';
+		include_once 'partials/wp-dashbord-analytics-admin-display.php';
 	}
-	function analytics_page(){
-		include_once 'partials/wp-store-analytics-admin-dashboard.php';
+	function store_analytics_page(){
+		include_once 'partials/wp-store-analytics-admin-display.php';
+	}
+	function trafic_analytics_page(){
+		include_once 'partials/wp-trafic-analytics-admin-display.php';
 	}
 	function config_page(){
-		include_once 'partials/wp-store-analytics-admin-dashboard.php';
+		include_once 'partials/wp-config-analytics-admin-display.php';
 	}
 	
 }
