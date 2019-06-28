@@ -20,6 +20,8 @@
  * @subpackage Wp_Store_Analytics/admin
  * @author     DADAY Andry <andrysahaedena@gmail.com>
  */
+require_once('class/wsm_db.php' );
+
 class Wp_Store_Analytics_Admin {
 
 	/**
@@ -47,10 +49,14 @@ class Wp_Store_Analytics_Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
+	
+	private $objDatabase;
+	
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->objDatabase=new wsmDatabase();
 
 	}
 
@@ -73,8 +79,11 @@ class Wp_Store_Analytics_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-store-analytics-admin.css', array(), $this->version, 'all' );
-
+		 wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ).'css/bootstrap.min.css',array(),array(), null, 'all');
+		 wp_enqueue_style("leaflet_css","http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css");
+		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-store-analytics-admin.css');
+		
+		
 	}
 
 	/**
@@ -96,15 +105,18 @@ class Wp_Store_Analytics_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-store-analytics-admin.js', array( 'jquery' ), $this->version, false );
+		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-store-analytics-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name,'http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js');
+		wp_register_script("trafic_map_controller", plugin_dir_url( __FILE__ ) . 'js/wp-store-trafic-map.js');
+		wp_enqueue_script("trafic_map_controller");
 
 	}
 	public function add_admin_menu_page(){
 		$this->plugin_screen_hook_suffix = add_menu_page( "Store analytics", "Store analytics","manage_options","wp-store-analytics-menu",array($this,'dashboard_page'),'','2.2.9');
-		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Dashboard','Dashboard', "manage_options", 'wp-store-analytics-dashboard-submenu', array($this,'dashboard_page'));
-		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Store_analytics','Store analytics', "manage_options", 'wp-store-analytics-analytics-submenu', array($this,'store_analytics_page'));
-		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Trafic_analytics','Trafic analytics', "manage_options", 'wp-store-analytics-analytics-submenu', array($this,'trafic_analytics_page'));
-		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Configuration','Configuration', "manage_options", 'wp-store-analytics-config-submenu', array($this,'config_page'));
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Dashboard','Dashboard', "manage_options", 'wp-dashboard-analytics', array($this,'dashboard_page'));
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Store_analytics','Store analytics', "manage_options", 'wp-store-analytics', array($this,'store_analytics_page'));
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Trafic_analytics','Trafic analytics', "manage_options", 'wp-trafic-analytics', array($this,'trafic_analytics_page'));
+		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Configuration','Configuration', "manage_options", 'wp-store-analytics-config', array($this,'config_page'));
 	}
 	function dashboard_page(){
 		include_once 'partials/wp-dashbord-analytics-admin-display.php';
@@ -113,10 +125,18 @@ class Wp_Store_Analytics_Admin {
 		include_once 'partials/wp-store-analytics-admin-display.php';
 	}
 	function trafic_analytics_page(){
+		$totalPageViews=$this->objDatabase->fnGetTotalPageViewCount();
+		$totalPageViews=number_format_i18n($totalPageViews,0);
+
+		$totalVisitors=$this->objDatabase->fnGetTotalVisitorsCount();
+        $onlineVisitors=$this->objDatabase->fnGetTotalVisitorsCount('Online');
+		
+		$totalPageViews=number_format_i18n($totalPageViews,0);
+		$totalVisitors=number_format_i18n($totalVisitors,0);
+		
 		include_once 'partials/wp-trafic-analytics-admin-display.php';
 	}
 	function config_page(){
 		include_once 'partials/wp-config-analytics-admin-display.php';
-	}
-	
+	}	
 }

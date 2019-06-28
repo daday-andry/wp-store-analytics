@@ -25,17 +25,24 @@
  * Domain Path:       /languages
  */
 
+
+ 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
+include_once (plugin_dir_path( __FILE__ ) . 'includes/functions.php');
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'WP_STORE_ANALYTICS_VERSION', '1.0.0' );
+define( 'WSM_ONLINE_SESSION',15 ); //DEFINE ONLINE SESSION TIME IN MINUTES
+define( 'WSM_PREFIX','wsm');
+
+define( 'WSA_URL', plugin_dir_url( __FILE__ ) );
+define('WSA_TIMEZONE',wsmCurrentGetTimezoneOffset());
 
 /**
  * The code that runs during plugin activation.
@@ -64,6 +71,12 @@ register_deactivation_hook( __FILE__, 'deactivate_wp_store_analytics' );
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-wp-store-analytics.php';
 
+global $wsmAdminPageHooks,$wsmRequestArray;
+$wsmAdminPageHooks=array();
+$wsmRequestArray=array();
+if(isset($_REQUEST) && is_array($_REQUEST)){
+    $wsmRequestArray=$_REQUEST;
+}
 /**
  * Begins execution of the plugin.
  *
