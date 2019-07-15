@@ -2,3 +2,22 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+ .breadcrumb > li + li:before {
+    color: #ccc;
+    content: "> ";
+    padding: 0 2px;
+}
+#map_path{
+    margin:0px 0px 10px 0px;
+}
+#map_path .fa-globe{
+    font-size:20px
+}
+.online_user_count{
+    font-size: 50px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+}
+

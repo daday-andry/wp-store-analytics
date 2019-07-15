@@ -2753,7 +2753,7 @@ function wsmFnStatCalculations($type, $pageViews, $firstTimeVisitors, $visitors)
        $factor=24*30; 
     }
     if($visitors>0){
-        $arrReturn['avgOnline']=($visitors/($factor*60))*WSM_ONLINE_SESSION;
+        $arrReturn['avgOnline']=($visitors/($factor*60))*WSA_ONLINE_SESSION;
     }
     return $arrReturn;
 }

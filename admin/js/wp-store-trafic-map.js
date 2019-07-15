@@ -17,7 +17,14 @@ jQuery(document).ready(function(){
                     var latlng_click = map.mouseEventToLatLng(ev.originalEvent);
                     var continent_name=featureData.properties.continent;
                     var contry_name=featureData.properties.brk_name;
-                    jQuery("#map_path").text(continent_name+"/"+contry_name);
+                    
+                    var path_html=
+                    "<li class='breadcrumb-item'><a href='#'><i class='fa fa-globe'></i></a></li>"+
+                    "<li class='breadcrumb-item'>"+continent_name+"</li>"+
+                    "<li class='breadcrumb-item active'>"+contry_name+"</li>";
+
+                    jQuery("#map_path").html(path_html);
+                    
                     console.log(latlng_click);
                     map.setView([latlng_click.lat,latlng_click.lng],4);    
                 });

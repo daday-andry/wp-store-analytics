@@ -79,9 +79,11 @@ class Wp_Store_Analytics_Admin {
 		 * class.
 		 */
 
-		 wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ).'css/bootstrap.min.css',array(),array(), null, 'all');
-		 wp_enqueue_style("leaflet_css","http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css");
-		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-store-analytics-admin.css');
+		wp_enqueue_style( "boot_strap_css", plugin_dir_url( __FILE__ ).'css/bootstrap.min.css',false, '1.0.0');
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-store-analytics-admin.css');
+		wp_enqueue_style("leaflet_css","http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css");
+		wp_enqueue_style("font_awesome","https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+		wp_enqueue_style( "boot_strap_css", plugin_dir_url( __FILE__ ).'css/jquery.jqplot.css',false, '1.0.0');
 		
 		
 	}
@@ -109,7 +111,12 @@ class Wp_Store_Analytics_Admin {
 		wp_enqueue_script( $this->plugin_name,'http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js');
 		wp_register_script("trafic_map_controller", plugin_dir_url( __FILE__ ) . 'js/wp-store-trafic-map.js');
 		wp_enqueue_script("trafic_map_controller");
+		wp_enqueue_script('jqplot-main',plugin_dir_url( __FILE__ ).'js/jqplot/jquery.jqplot.js',array(),'1.0.0',true );
+		wp_enqueue_script('jqplot-pie-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.pieRenderer.js',array(),'1.0.0',true );
+		wp_enqueue_script('jqplot-bar-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.barRenderer.js',array(),'1.0.0',true );
+		wp_enqueue_script('jqplot-axis-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.categoryAxisRenderer.js',array(),'1.0.0',true );
 
+		
 	}
 	public function add_admin_menu_page(){
 		$this->plugin_screen_hook_suffix = add_menu_page( "Store analytics", "Store analytics","manage_options","wp-store-analytics-menu",array($this,'dashboard_page'),'','2.2.9');
@@ -117,6 +124,7 @@ class Wp_Store_Analytics_Admin {
 		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Store_analytics','Store analytics', "manage_options", 'wp-store-analytics', array($this,'store_analytics_page'));
 		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Trafic_analytics','Trafic analytics', "manage_options", 'wp-trafic-analytics', array($this,'trafic_analytics_page'));
 		$this->plugin_screen_hook_suffix = add_submenu_page('wp-store-analytics-menu', 'Configuration','Configuration', "manage_options", 'wp-store-analytics-config', array($this,'config_page'));
+	
 	}
 	function dashboard_page(){
 		include_once 'partials/wp-dashbord-analytics-admin-display.php';

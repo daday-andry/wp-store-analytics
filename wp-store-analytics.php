@@ -38,7 +38,7 @@ include_once (plugin_dir_path( __FILE__ ) . 'includes/functions.php');
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'WP_STORE_ANALYTICS_VERSION', '1.0.0' );
-define( 'WSM_ONLINE_SESSION',15 ); //DEFINE ONLINE SESSION TIME IN MINUTES
+define( 'WSA_ONLINE_SESSION',1 ); //DEFINE ONLINE SESSION TIME IN MINUTES
 define( 'WSM_PREFIX','wsm');
 
 define( 'WSA_URL', plugin_dir_url( __FILE__ ) );

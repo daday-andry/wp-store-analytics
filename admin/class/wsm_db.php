@@ -363,7 +363,7 @@ class wsmDatabase{
         $sqlQuery="SELECT VI.visitId, VI.ipAddress,VI.hits, VI.city, VI.alpha2Code,VI.country, VI.browser ,VI.osystem, VI.deviceType, VI.title, VI.url,VI.latitude, VI.longitude, VI.resolution, VI.refUrl";
         $sqlQuery.=",TIMEDIFF('{$currentDate}',{$visitLastActionTime}) as timeDiff";        
         $sqlQuery.=" FROM {$this->tablePrefix}_visitorInfo VI";        
-        $sqlQuery.=" WHERE {$visitLastActionTime} >= '".wsmGetDateByInterval('-'.WSM_ONLINE_SESSION.' minutes')."'";
+        $sqlQuery.=" WHERE {$visitLastActionTime} >= '".wsmGetDateByInterval('-'.WSA_ONLINE_SESSION.' minutes')."'";
         $sqlQuery.=" ORDER BY VI.hits DESC";
         
         if($limit!='')
@@ -387,7 +387,7 @@ class wsmDatabase{
             $groupByQuery.=',city';
         }
         $sqlQuery.=' FROM '.$this->tablePrefix.'_visitorInfo';
-         $sqlQuery.=" WHERE {$visitLastActionTime} >= '".wsmGetDateByInterval('-'.WSM_ONLINE_SESSION.' minutes')."'";
+         $sqlQuery.=" WHERE {$visitLastActionTime} >= '".wsmGetDateByInterval('-'.WSA_ONLINE_SESSION.' minutes')."'";
         $sqlQuery.=$groupByQuery.' ORDER BY visitors DESC';
         $arrResult=$this->wsmDB->get_results($sqlQuery,ARRAY_A);
         $this->arrCachedStats['activeVisitorsCount'.$groupBy]=$arrResult;
@@ -416,7 +416,7 @@ class wsmDatabase{
                 $whereCondition.="AND {$visitLastActionTime} >= '".wsmGetDateByInterval('-2 months','Y-m-d 00:00:00')."'";
                 break;
             case 'Online':
-                $whereCondition.="AND {$visitLastActionTime} >= '".wsmGetDateByInterval('-'.WSM_ONLINE_SESSION.' minutes')."'";
+                $whereCondition.="AND {$visitLastActionTime} >= '".wsmGetDateByInterval('-'.WSA_ONLINE_SESSION.' minutes')."'";
                 break;
             case '7dayBeforeHour':
                 $whereCondition.="AND {$visitLastActionTime} >= '".wsmGetDateByInterval('-7 days','Y-m-d '.wsmGetCurrentDateByTimeZone('H').':00:00')."' AND {$visitLastActionTime}<='".wsmGetDateByInterval('-7 days','Y-m-d '.wsmGetCurrentDateByTimeZone('H').':59:59')."'";
@@ -2079,7 +2079,7 @@ class wsmDatabase{
         $serverTime="CONVERT_TZ(serverTime,'+00:00','".$newTimeZone."')";
         $currentDate=wsmGetCurrentDateByTimeZone();
         $sql='SELECT *,TIMEDIFF("'.$currentDate.'",'.$serverTime.') as timeDiff FROM '.$this->tablePrefix.'_visitorInfo';
-        $sql.=' WHERE '.$serverTime.' >= "'.wsmGetDateByInterval('-'.WSM_ONLINE_SESSION.' minutes').'"';
+        $sql.=' WHERE '.$serverTime.' >= "'.wsmGetDateByInterval('-'.WSA_ONLINE_SESSION.' minutes').'"';
         $sql.=' ORDER BY serverTime DESC limit 0,'.$limit;        
         $result=$this->wsmDB->get_results($sql,ARRAY_A);
         return $result;
@@ -2088,7 +2088,7 @@ class wsmDatabase{
         $newTimeZone=wsmCurrentGetTimezoneOffset();        
         $serverTime="CONVERT_TZ(serverTime,'+00:00','".$newTimeZone."')";
         $sql='SELECT COUNT(DISTINCT urlId) FROM '.$this->tablePrefix.'_visitorInfo';
-        $sql.=' WHERE '.$serverTime.' >= "'.wsmGetDateByInterval('-'.WSM_ONLINE_SESSION.' minutes').'"';
+        $sql.=' WHERE '.$serverTime.' >= "'.wsmGetDateByInterval('-'.WSA_ONLINE_SESSION.' minutes').'"';
         //echo $sql.=' GROUP by URLId';                
         $result=$this->wsmDB->get_var($sql);
         return $result;
@@ -2100,7 +2100,7 @@ class wsmDatabase{
         $newTimeZone=wsmCurrentGetTimezoneOffset();
         $serverTime="CONVERT_TZ(VI.serverTime,'+00:00','".$newTimeZone."')";
         $sql='SELECT VI.URLId, VI.title, VI.url as fullURL, sum(VI.hits) as stotalViews, VI.visitLastActionTime FROM '.$this->tablePrefix.'_visitorInfo VI';
-        $sql.=' WHERE '.$serverTime.' >= "'.wsmGetDateByInterval('-'.WSM_ONLINE_SESSION.' minutes').'"';
+        $sql.=' WHERE '.$serverTime.' >= "'.wsmGetDateByInterval('-'.WSA_ONLINE_SESSION.' minutes').'"';
         $sql.=' GROUP by VI.URLId ORDER BY stotalViews DESC limit 0,'.$limit;                
         $result=$this->wsmDB->get_results($sql,ARRAY_A);
         return $result;
@@ -2113,7 +2113,7 @@ class wsmDatabase{
         $visitLastActionTime="CONVERT_TZ(visitLastActionTime,'+00:00','".$newTimeZone."')";
         $sql='SELECT LU.refererUrlId, CONCAT(UL.protocol,UL.url) as fullURL, '.$visitLastActionTime.' as visitLastActionTime,COUNT(LU.refererUrlId) AS totalReferrers FROM '.$this->tablePrefix.'_logUniqueVisit  LU  LEFT JOIN '.$this->tablePrefix.'_url_log UL ON LU.refererUrlId=UL.id  WHERE LU.refererUrlId!=0';
        // $sql='SELECT * FROM '.$this->tablePrefix.'_popularReferrers ORDER BY totalReferrers DESC';
-        $sql.=' AND '.$visitLastActionTime.' >= "'.wsmGetDateByInterval('-'.WSM_ONLINE_SESSION.' minutes').'"';        
+        $sql.=' AND '.$visitLastActionTime.' >= "'.wsmGetDateByInterval('-'.WSA_ONLINE_SESSION.' minutes').'"';        
         $sql.='GROUP BY LU.refererUrlId ORDER BY totalReferrers DESC, visitLastActionTime  DESC limit 0,'.$limit;        
         $result=$this->wsmDB->get_results($sql,ARRAY_A);
         return $result;
