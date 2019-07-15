@@ -25,38 +25,91 @@
             <div class="map_view" id="map_view" style="width:100%; height: 800px"> 
             </div>
         </div>
-        <div class="detail col-sm-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Detail</div>
-                <div class="panel-body">
-                <?php 
-                $args = array(
-                    'post_type' => 'shop_order',
-                    'post_status'=>'wc-completed',
-                   'posts_per_page' => '-1'
-                  );
-                  $my_query = new WP_Query($args);
-                  foreach ($my_query->posts as $key => $order) {
-                      # code...
-                      $order = wc_get_order($order->ID);
-                      $order_data = $order->get_data();
-                      echo "<strong>".$order_data['shipping']['first_name']." ".$order_data['shipping']['last_name']."</strong><br>";
-                      echo "&nbsp <span>".$order_data['shipping']['state']."</span>";
-                      echo "&nbsp <span>".$order_data['shipping']['country']."</span>";
-                      echo "&nbsp <span>".$order_data['shipping']['city']."</span>";
-                      echo "&nbsp <span>".$order_data['shipping']['postcode']."</span>";
-                      echo "&nbsp <span>".$order_data['shipping']['address_1']."</span>";
-                      echo "&nbsp <span> / ".$order_data['billing']['email']."</span>";
-                      echo "&nbsp <span> - ".$order_data['billing']['phone']."</span>";
-                      echo   '<hr>';
-                  }
-                ?>
+        <div class="detail col-sm-4 row">
+            
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Convertion rate</div>
+                    <div class="panel-body">
+                            Taux de convertion = nombre de commandes/nbr visite
+                    </div>
                 </div>
             </div>
-            <div class="detail-graph">
 
-            </div>            
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> Fidelization rate </div>
+                    <div class="panel-body">
+                    Nouveaux clients / clients récurrents
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Average Order</div>
+                    <div class="panel-body">
+                            Taux de convertion
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Cart abandonment rate</div>
+                    <div class="panel-body">
+                            Taux de convertion
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Product relationship</div>
+                    <div class="panel-body">
+                            Taux de convertion
+                    </div>
+                </div>
+            </div>
+
+
+            
+
+
+                        
         </div>
     <div>
 </section>
 
+
+
+
+<!---- Liste des client
+<div class="panel panel-primary">
+    <div class="panel-heading">Detail</div>
+    <div class="panel-body">
+    < 
+    $args = array(
+        'post_type' => 'shop_order',
+        'post_status'=>'wc-completed',
+        'posts_per_page' => '-1'
+        );
+        $my_query = new WP_Query($args);
+        foreach ($my_query->posts as $key => $order) {
+            # code...
+            $order = wc_get_order($order->ID);
+            $order_data = $order->get_data();
+            echo "<strong>".$order_data['shipping']['first_name']." ".$order_data['shipping']['last_name']."</strong><br>";
+            echo "&nbsp <span>".$order_data['shipping']['state']."</span>";
+            echo "&nbsp <span>".$order_data['shipping']['country']."</span>";
+            echo "&nbsp <span>".$order_data['shipping']['city']."</span>";
+            echo "&nbsp <span>".$order_data['shipping']['postcode']."</span>";
+            echo "&nbsp <span>".$order_data['shipping']['address_1']."</span>";
+            echo "&nbsp <span> / ".$order_data['billing']['email']."</span>";
+            echo "&nbsp <span> - ".$order_data['billing']['phone']."</span>";
+            echo   '<hr>';
+        }
+    ?>
+    </div>
+    </div>
+    -->

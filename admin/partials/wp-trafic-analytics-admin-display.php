@@ -25,20 +25,69 @@
             <div class="map_view" id="map_view" style="width:100%; height: 800px"> 
             </div>
         </div>
-        <div class="detail col-sm-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Detail</div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Total page view : <?php echo $totalPageViews ?></li>
-                        <li class="list-group-item">Total visitor : <?php echo $totalVisitors ?></li>
-                        <li class="list-group-item">Total on line : <?php echo $onlineVisitors ?></li>
-                    </ul>
+        <div class="detail col-sm-4 row">
+            <div class="col-sm-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Overview</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Page view : <?php echo $totalPageViews ?></li>
+                            <li class="list-group-item">Visitor : <?php echo $totalVisitors ?></li>
+                            <li class="list-group-item">New visitor : <?php echo $onlineVisitors ?></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="detail-graph">
+            
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">On line</div>
+                    <div class="panel-body">
+                        <?php echo $onlineVisitors ?>
+                    </div>
+                </div>
+            </div>
+            
 
-            </div>            
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Top trafic source</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Google : </li>
+                            <li class="list-group-item">FB : </li>
+                            <li class="list-group-item">Access direct : </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Detail</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Total page view : <?php echo $totalPageViews ?></li>
+                            <li class="list-group-item">Total visitor : <?php echo $totalVisitors ?></li>
+                            <li class="list-group-item">Total on line : <?php echo $onlineVisitors ?></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Detail</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Total page view : <?php echo $totalPageViews ?></li>
+                            <li class="list-group-item">Total visitor : <?php echo $totalVisitors ?></li>
+                            <li class="list-group-item">Total on line : <?php echo $onlineVisitors ?></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     <div>
 </section>
