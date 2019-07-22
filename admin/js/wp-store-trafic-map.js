@@ -6,6 +6,7 @@ jQuery(document).ready(function(){
             fillOpacity: 1
     }
     var myGeoJSONPath = "/wp-content/plugins/wp-store-analytics/admin/res/custom.geo.json"; 
+    //var myGeoJSONPath = "/wp-content/plugins/wp-store-analytics/admin/res/mg-all.geo.json"; 
     console.log("chargement carte");
     jQuery.getJSON(myGeoJSONPath,function(data){
         var map = L.map('map_view').setView([52.482780222078226,0.3515625],1);

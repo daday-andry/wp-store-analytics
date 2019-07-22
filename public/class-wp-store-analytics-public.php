@@ -127,7 +127,7 @@ class Wp_Store_Analytics_Public {
 						_wsm.push([\'setPageId\', "'.$postID.'"]);
 						_wsm.push([\'setWpUserId\', "'.get_current_user_id().'"]);           
 						var d=document, g=d.createElement(\'script\'), s=d.getElementsByTagName(\'script\')[0];
-						g.type=\'text/javascript\'; g.async=true; g.defer=true; g.src=u+\'js/wsm_new.js\'; s.parentNode.insertBefore(g,s);
+						g.type=\'text/javascript\'; g.async=true; g.defer=true; g.src=u+\'admin/js/wsa_new.js\'; s.parentNode.insertBefore(g,s);
 					})();
 				</script>
 				<!-- End Wordpress Stats Manager Code -->';

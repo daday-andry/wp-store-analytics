@@ -120,7 +120,7 @@
 
 
         // Top trafic source chart
-        var line1 = [['Google', 10],['Facebook', 8],['Direct accée', 6],['Inknow', 4]];
+        var line1 = [['Google', 10],['Facebook', 8],['Direct access', 6],['Inknow', 4]];
         var barPlot = jQuery.jqplot('chart2',[line1], {
             seriesDefaults:{
                 renderer:jQuery.jqplot.BarRenderer,
