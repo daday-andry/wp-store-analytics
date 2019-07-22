@@ -156,10 +156,11 @@
 
         $.extend(true, this, options);
     };
+    
     var locations = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
     var locationIndicies = {'nw':0, 'n':1, 'ne':2, 'e':3, 'se':4, 's':5, 'sw':6, 'w':7};
     var oppositeLocations = ['se', 's', 'sw', 'w', 'nw', 'n', 'ne', 'e'];
-    var mirrorLocations = ['ne', 'n', 'nw', 'w', 'sw', 's', 'se', 'e'];
+    
     // axis.renderer.tickrenderer.formatter
     
     // called with scope of plot
@@ -340,19 +341,9 @@
         }
 
         var loc = locations;
-        /*if (series.fillToZero && series.fill && neighbor.data[1] < 0) {
-          loc = oppositeLocations;
-        }*/
-        var locCode = loc[locationIndicies[opts.tooltipLocation]];
-
-        if(gridpos.x < (plot._width/2) && locCode.indexOf("w")!==-1) {
-          loc = mirrorLocations;
-        }else if(gridpos.x > (plot._width/2) && locCode.indexOf("e")!==-1) {
-          loc = mirrorLocations;
-        }else if (series.fillToZero && series.fill && neighbor.data[1] < 0) {
+        if (series.fillToZero && series.fill && neighbor.data[1] < 0) {
           loc = oppositeLocations;
         }
-
 
         switch (loc[locationIndicies[opts.tooltipLocation]]) {
             case 'nw':

@@ -479,7 +479,7 @@
                 g = c.tooltipAxisGroups[i];
                 if (addbr) {
                     s += '<br />';
-                }                
+                }
                 if (c.useAxesFormatters) {
                     for (var j=0; j<g.length; j++) {
                         if (j) {

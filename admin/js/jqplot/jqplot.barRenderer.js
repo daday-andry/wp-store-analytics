@@ -42,7 +42,7 @@
     $.jqplot.BarRenderer.prototype.constructor = $.jqplot.BarRenderer;
     
     // called with scope of series.
-    $.jqplot.BarRenderer.prototype.init = function(options, plot) {       
+    $.jqplot.BarRenderer.prototype.init = function(options, plot) {
         // Group: Properties
         //
         // prop: barPadding
@@ -328,7 +328,7 @@
     
     $.jqplot.BarRenderer.prototype.draw = function(ctx, gridData, options, plot) {
         var i;
-        // Ughhh, have to make a copy of options b/c it may be modified later.        
+        // Ughhh, have to make a copy of options b/c it may be modified later.
         var opts = $.extend({}, options);
         var shadow = (opts.shadow != undefined) ? opts.shadow : this.shadow;
         var showLine = (opts.showLine != undefined) ? opts.showLine : this.showLine;
@@ -357,19 +357,19 @@
         }
         else {
             this._barNudge = (-Math.abs(nseries/2 - 0.5) + pos) * (this.barWidth + this.barPadding);
-        }       
+        }
         if (showLine) {
             var negativeColors = new $.jqplot.ColorGenerator(this.negativeSeriesColors);
             var positiveColors = new $.jqplot.ColorGenerator(this.seriesColors);
-            var alphaColors = new $.jqplot.ColorGenerator(this.seriesAlphaColors);
             var negativeColor = negativeColors.get(this.index);
             if (! this.useNegativeColors) {
                 negativeColor = opts.fillStyle;
-            }           
+            }
             var positiveColor = opts.fillStyle;
             var base;
             var xstart; 
-            var ystart;           
+            var ystart;
+            
             if (this.barDirection == 'vertical') {
                 for (var i=0; i<gridData.length; i++) {
                     if (!this._stack && this.data[i][1] == null) {
@@ -422,24 +422,19 @@
                             if (this.useNegativeColors) {
                                 opts.fillStyle = negativeColors.next();
                             }
-                            else {                                
-                                if(i>this.startAlpha){
-                                    opts.fillStyle=alphaColors.next();
-                                }else{
-                                    opts.fillStyle = positiveColors.next();
-                                }
-                               // opts.fillStyle = positiveColors.next();
+                            else {
+                                opts.fillStyle = positiveColors.next();
                             }
                         }
                         else {
                             opts.fillStyle = negativeColor;
                         }
                     }
-                    else {                         
+                    else {
                         if (this.varyBarColor && !this._stack) {
                             opts.fillStyle = positiveColors.next();
                         }
-                        else {                            
+                        else {
                             opts.fillStyle = positiveColor;
                         }
                     }
@@ -467,10 +462,6 @@
                         this.renderer.shadowRenderer.draw(ctx, points, sopts);
                     }
                     var clr = opts.fillStyle || this.color;
-                    if(i>this.startAlpha){                                                
-                        clr=clr.replace(",1)", ",0.3)");
-                        opts.fillStyle=clr;                       
-                    }                                         
                     this._dataColors.push(clr);
                     this.renderer.shapeRenderer.draw(ctx, points, opts); 
                 }

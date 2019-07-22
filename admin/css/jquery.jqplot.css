@@ -257,9 +257,3 @@ div.jqplot-noData-container {
     text-align: center;
     background-color: rgba(96%, 96%, 96%, 0.3);
 }
-
-.title_colud_panel .wsmTooltip .wsmTooltipText {
-  left: -25%;
-  top: -70px;
-  width: 120px;
-}

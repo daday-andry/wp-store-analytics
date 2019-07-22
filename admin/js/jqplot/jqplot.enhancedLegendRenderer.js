@@ -201,7 +201,6 @@
                                         speed = this.seriesToggle;
                                     }
                                 } 
-                                
                                 if (this.showSwatches) {
                                     td1.bind('click', {series:s, speed:speed, plot: plot, replot:this.seriesToggleReplot}, handleToggle);
                                     td1.addClass('jqplot-seriesToggle');

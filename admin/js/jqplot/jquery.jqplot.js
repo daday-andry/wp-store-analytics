@@ -1371,13 +1371,12 @@
 
         if (!this.fillColor) {
             this.fillColor = this.color;
-        }        
+        }
         if (this.fillAlpha) {
             var comp = $.jqplot.normalize2rgb(this.fillColor);
             var comp = $.jqplot.getColorComponents(comp);
             this.fillColor = 'rgba('+comp[0]+','+comp[1]+','+comp[2]+','+this.fillAlpha+')';
         }
-        
         if ($.isFunction(this.renderer)) {
             this.renderer = new this.renderer();  
         }
@@ -3228,7 +3227,6 @@
                     fill : true,
                     closePath : true
                 };
-                
                 sr.draw(series1.shadowCanvas._ctx, gd, opts)
             }
 
@@ -5753,7 +5751,7 @@
     $.jqplot.LineRenderer.prototype.draw = function(ctx, gd, options, plot) {
         var i;
         // get a copy of the options, so we don't modify the original object.
-        var opts = $.extend(true, {}, options);       
+        var opts = $.extend(true, {}, options);
         var shadow = (opts.shadow != undefined) ? opts.shadow : this.shadow;
         var showLine = (opts.showLine != undefined) ? opts.showLine : this.showLine;
         var fill = (opts.fill != undefined) ? opts.fill : this.fill;
@@ -5764,7 +5762,6 @@
             if (showLine) {
                 // if we fill, we'll have to add points to close the curve.
                 if (fill) {
-                    
                     if (this.fillToZero) { 
                         // have to break line up into shapes at axis crossings
                         var negativeColor = this.negativeColor;
@@ -5833,7 +5830,6 @@
                                 tempgd.push([gd[gd.length-1][0], pyzero]); 
                                 this._areaPoints.push([gd[gd.length-1][0], pyzero]); 
                             }
-                            
                             // now draw the last area.
                             if (shadow) {
                                 this.renderer.shadowRenderer.draw(ctx, tempgd, opts);
@@ -5857,7 +5853,7 @@
                             if (shadow) {
                                 this.renderer.shadowRenderer.draw(ctx, gd, opts);
                             }
-                            this._areaPoints = gd;                            
+                            this._areaPoints = gd;
                             this.renderer.shapeRenderer.draw(ctx, gd, opts);
                         }
                     }
@@ -5868,7 +5864,7 @@
                         // if stoking line as well as filling, get a copy of line data.
                         if (fillAndStroke) {
                             var fasgd = gd.slice(0);
-                        }                        
+                        }
                         // if not stacked, fill down to axis
                         if (this.index == 0 || !this._stack) {
                             // var gridymin = this._yaxis.series_u2p(this._yaxis.min) - this.gridBorderWidth / 2;
@@ -5901,7 +5897,7 @@
                         // if (shadow) {
                         //     this.renderer.shadowRenderer.draw(ctx, fasgd, fasopts);
                         // }
-                        // now draw the markers                        
+                        // now draw the markers
                         if (this.markerRenderer.show) {
                             if (this.renderer.smooth) {
                                 fasgd = this.gridData;
