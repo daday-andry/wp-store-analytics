@@ -15,9 +15,6 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <section>
     <h1>Store analytics</h1><hr>
-    <nav class="breadcrumb" role="navigation">
-        <span>Map://<i id="map_path"></i></span>
-    </nav>
 </section>
 <section>
     <div class="main-content row">
@@ -28,25 +25,25 @@
         <div class="detail col-sm-4 row">
             <nav>
                 <ol class="breadcrumb" id="map_path">
-                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-globe"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#" id="init_map_position"><i class="fa fa-globe"></i></a></li>
                     <li class="breadcrumb-item active">Accessories</li>
                 </ol>
             </nav>    
             <div class="col-sm-6">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Convertion rate</div>
-                    <div class="panel-body">
-                        <div id="convertion_chart"></div>
-                            Taux de convertion = nombre de commandes/nbr visite
+                    <div class="panel-heading"> Conversion rate </div>
+                    <div class="panel-body" id="convertion_chart">
                     </div>
-                </div>
+                </div>    
             </div>
-
+            <div class="col-sm-6">
+                <div id="chart4"></div>
+            </div>
             <div class="col-sm-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading"> Fidelization rate </div>
                     <div class="panel-body">
-                    Nouveaux clients / clients récurrents
+                        Nouveaux clients / clients récurrents
                     </div>
                 </div>
             </div>
@@ -88,50 +85,40 @@
                     </div>
                 </div>
             </div>
-
-
-            
-
-
-                        
         </div>
     <div>
 </section>
 <script type="text/javascript">
    jQuery(document).ready(function(){
         //Conversion rate chart
-        /*
-        var data = [
-            ['Surfer', 80],['Customer', 20]
-        ];
-        var colors = ['#aa4644','#4573a7'];
-        jQuery.jqplot.config.enablePlugins = true;
-        var piePlot = jQuery.jqplot('convertion_chart', [data], {
-            seriesColors :colors,
-            height: 150,
-            grid:{
-                drawBorder: false,
-                background: '#ffffff',
-                shadow:false
-                },
-            seriesDefaults: {
-                renderer: jQuery.jqplot.PieRenderer,
-                rendererOptions: 
-                    {
-                        diameter: 100,
-                        showDataLabels:true
-                    },
-                pointLabels: { show: true }
+        var data = [['Surfer', 98],['Order', 2]];
+        var plot4 = jQuery.jqplot('convertion_chart', [data], {
+        height: 200,
+        grid:{
+            drawBorder: false,
+            background: '#ffffff',
+            shadow:false,
+                
+        },
+        seriesDefaults: {
+        renderer:jQuery.jqplot.DonutRenderer,
+        rendererOptions:{
+            sliceMargin: 3,
+            startAngle: -90,
+            showDataLabels: true,
+            dataLabels: 'value',
+            totalLabel: true,
             }
-        });*/
+        }
+    });
+    /*
         plot2 = jQuery.jqplot('convertion_chart', 
-            [[['Surfer', 80],['Order', 20]]], 
+            [[['Surfer', 98],['Order', 2]]], 
             {
             grid:{
                 drawBorder: false,
                 background: '#ffffff',
                 shadow:false,
-                diameter: 100,
             },
             seriesDefaults: {
                 diameter: 80,
@@ -147,8 +134,7 @@
 
             }
         );
-
-
+        */
         // Top trafic source chart
         var line1 = [['Google', 10],['Facebook', 8],['Direct accée', 6],['Inknow', 4]];
         var barPlot = jQuery.jqplot('chart2',[line1], {
@@ -168,12 +154,12 @@
         });
 
         // CA Evolution
-        var s1 = [[2002, 112000], [2003, 122000], [2004, 104000], [2005, 99000], [2006, 121000], 
+        var chifre_affaire = [[2002, 112000], [2003, 122000], [2004, 104000], [2005, 99000], [2006, 121000], 
                 [2007, 148000], [2008, 114000], [2009, 133000], [2010, 161000], [2011, 173000]];
-        var s2 = [[2002, 10200], [2003, 10800], [2004, 11200], [2005, 11800], [2006, 12400], 
+        var nbr_visiteur = [[2002, 10200], [2003, 10800], [2004, 11200], [2005, 11800], [2006, 12400], 
         [2007, 12800], [2008, 13200], [2009, 12600], [2010, 13100]];
  
-        plot1 = jQuery.jqplot("ca_evolution_chart", [s2, s1], {
+        plot1 = jQuery.jqplot("ca_evolution_chart", [nbr_visiteur, chifre_affaire], {
         // Turns on animatino for all series in this plot.
         animate: true,
         // Will animate plot on calls to plot1.replot({resetAxes:true})
@@ -258,6 +244,20 @@
         }
     });
 
+        // Boutique performance / Objectif
+        s1 = [1.5];
+ 
+        plot1 = jQuery.jqplot('chart4',[s1],{
+            height: 100,
+            seriesDefaults: {
+                renderer: jQuery.jqplot.MeterGaugeRenderer,
+                rendererOptions: {
+                    //showTickLabels: false,
+                    intervals:[0.5,1,2],
+                    intervalColors:['#cc6666', '#E7E658', '#66cc66']
+                }
+            }
+        });
 
 
 

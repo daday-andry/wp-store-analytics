@@ -81,7 +81,14 @@ class Wp_Store_Analytics_Admin {
 
 		wp_enqueue_style( "boot_strap_css", plugin_dir_url( __FILE__ ).'css/bootstrap.min.css',false, '1.0.0');
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-store-analytics-admin.css');
-		wp_enqueue_style("leaflet_css","http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css");
+		
+		//wp_enqueue_style("leaflet_css","http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css");
+		wp_enqueue_style("leaflet_css","https://unpkg.com/leaflet@1.0.3/dist/leaflet.css");
+
+		//marker cluster style
+		wp_enqueue_style("leaflet_marker_cluster_css","https://cdnjs.loli.net/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.css");
+		wp_enqueue_style("leaflet_marker_cluster_df_css","https://cdnjs.loli.net/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css");
+		
 		wp_enqueue_style("font_awesome","https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 		wp_enqueue_style( "boot_strap_css", plugin_dir_url( __FILE__ ).'css/jquery.jqplot.css',false, '1.0.0');
 		
@@ -108,12 +115,17 @@ class Wp_Store_Analytics_Admin {
 		 */
 
 		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-store-analytics-admin.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name,'http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js');
+		//wp_enqueue_script( $this->plugin_name,'http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js');
+		wp_enqueue_script( $this->plugin_name,'https://unpkg.com/leaflet@1.0.3/dist/leaflet.js');
 		wp_register_script("trafic_map_controller", plugin_dir_url( __FILE__ ) . 'js/wp-store-trafic-map.js');
-		wp_enqueue_script("trafic_map_controller");
+	//	wp_enqueue_script("trafic_map_controller");
+		
+		wp_enqueue_script('markercluster_js','https://cdnjs.loli.net/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster.js',array(),'1.0.0',true );
 		wp_enqueue_script('jqplot-main',plugin_dir_url( __FILE__ ).'js/jqplot/jquery.jqplot.js',array(),'1.0.0',true );
 		wp_enqueue_script('jqplot-pie-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.pieRenderer.js',array(),'1.0.0',true );
+		wp_enqueue_script('jqplot-donut-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.donutRenderer.js',array(),'1.0.0',true );
 		wp_enqueue_script('jqplot-bar-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.barRenderer.js',array(),'1.0.0',true );
+		wp_enqueue_script('jqplot-meter-gauge-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.meterGaugeRenderer.js',array(),'1.0.0',true );
 		wp_enqueue_script('jqplot-axis-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.categoryAxisRenderer.js',array(),'1.0.0',true );
 
 		
