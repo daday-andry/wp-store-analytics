@@ -31,16 +31,12 @@
             </nav>    
                 <!--span><a href="#">World</a>/<i id="map_path"></i></!--span -->
             <div class="col-sm-8">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Overview</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">Page view <span class="badge badge-light"><?php echo $totalPageViews ?></span></li>
-                            <li class="list-group-item">Visitor <span class="badge badge-light"><?php echo $totalVisitors ?></span></li>
-                            <li class="list-group-item">New visitor <span class="badge badge-light"><?php echo $onlineVisitors ?></span></li>
-                        </ul>
-                    </div>
-                </div>
+                <ul class="list-group">
+                    <li class="list-group-item active">Overview</li>
+                    <li class="list-group-item">Page view <span class="badge badge-light"><?php echo $totalPageViews ?></span></li>
+                    <li class="list-group-item">Visitor <span class="badge badge-light"><?php echo $totalVisitors ?></span></li>
+                    <li class="list-group-item">New visitor <span class="badge badge-light"><?php echo $onlineVisitors ?></span></li>
+                </ul>
             </div>
             
             <div class="col-sm-4">

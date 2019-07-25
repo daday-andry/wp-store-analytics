@@ -88,7 +88,6 @@ class Wp_Store_Analytics_Admin {
 		//marker cluster style
 		wp_enqueue_style("leaflet_marker_cluster_css","https://cdnjs.loli.net/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.css");
 		wp_enqueue_style("leaflet_marker_cluster_df_css","https://cdnjs.loli.net/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css");
-		
 		wp_enqueue_style("font_awesome","https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 		wp_enqueue_style( "boot_strap_css", plugin_dir_url( __FILE__ ).'css/jquery.jqplot.css',false, '1.0.0');
 		
@@ -127,6 +126,7 @@ class Wp_Store_Analytics_Admin {
 		wp_enqueue_script('jqplot-bar-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.barRenderer.js',array(),'1.0.0',true );
 		wp_enqueue_script('jqplot-meter-gauge-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.meterGaugeRenderer.js',array(),'1.0.0',true );
 		wp_enqueue_script('jqplot-axis-render',plugin_dir_url( __FILE__ ).'js/jqplot/jqplot.categoryAxisRenderer.js',array(),'1.0.0',true );
+		
 
 		
 	}
